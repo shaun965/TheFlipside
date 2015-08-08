@@ -9,8 +9,8 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  field :first,              type: String
-  field :last,               type: String
+  field :first_name,              type: String
+  field :last_name,               type: String
 
 
   ## Database authenticatable
@@ -35,6 +35,10 @@ class User
 
   def email_required?
     false
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 
   ## Confirmable
