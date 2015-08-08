@@ -1,0 +1,43 @@
+class LocationsController < ApplicationController
+
+  def create
+
+    # Use the entire google map object to check if modify
+
+    if @location = Location.where(longitude: location_params[:longitude], lattitude: location_params[:lattitude]).first
+      render json: { id: @location.id.to_s } , status: 200
+
+    else
+      @location = Location.new(location_params)    
+      if @location.save
+        render json: { id: @location.id.to_s }, status: 201
+      else       
+       render json: @location.errors, status: :unprocessable_entity 
+      end
+    
+    end
+    
+
+    #redirect_to :action => "show", :id => @location.id
+
+  end
+
+
+  def show
+    if !current_user
+      redirect_to new_user_session_path
+    end
+    @location = Location.where(id: params[:id]).first
+    @post = Post.new
+    @posts = @location.posts
+    @comment = Comment.new
+  end
+
+
+private
+
+  def location_params
+    params.permit(:longitude, :lattitude, :dir_longitude, :dir_lattitude)
+  end
+
+end

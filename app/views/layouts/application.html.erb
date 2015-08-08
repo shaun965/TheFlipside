@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GeoSoc</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= javascript_include_tag "vendor/modernizr" %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+  
+
+</head>
+<body onload="initialize()">
+
+<div id="user_nav">
+    <% if user_signed_in? %>
+        Signed in as <%= current_user.first %>&#160;<%= current_user.last %>
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+    <% else %>
+        <%= link_to 'Register', new_user_registration_path %> or <%= link_to 'Sign in', new_user_session_path %>
+    <% end %>
+</div>
+
+<%= yield %>
+
+</body>
+</html>
