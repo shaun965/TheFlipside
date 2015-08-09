@@ -85,8 +85,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 <div class = "row">
   <div class = "large-12 medium-12 small-12 columns">
-
-
+  <hr>
   <% @posts.each do |b| %>
     
     <div class = "row">
@@ -109,17 +108,19 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <% end %>
   </div>
   </div>
+  <br>
 
 <!--        Area end                  -->
 
   <% b.comments.each do |d| %>
+    <%= image_tag d.user.avatar.url(:thumb) %>
     <%= d.user.full_name %>:
     <%= d.text %>
     <br>
+    <br>
   <% end %>
 
-  <br>
-  <br>
+  <hr>
 
   <% end %>
 
