@@ -31,6 +31,8 @@ gem 'compass-rails', github: 'Compass/compass-rails', branch: '2-0-stable'
 gem 'zurb-foundation'
 gem 'foundation-rails'
 gem 'jquery-turbolinks'
+gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem 'paperclip', ['>= 3.4', '!= 4.3.0']
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
