@@ -91,7 +91,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     
     <div class = "row">
     <div class = "large-12 medium-12 small-12 columns">
-    <%= image_tag current_user.avatar.url(:thumb) %>
+    <%= image_tag b.user.avatar.url(:thumb) %>
     <%= b.user.full_name %>:
     <%= b.text %>
     </div>
