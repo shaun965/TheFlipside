@@ -113,7 +113,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <!--        Area end                  -->
 
   <% b.comments.each do |d| %>
-    <%= b.user.full_name %>:
+    <%= d.user.full_name %>:
     <%= d.text %>
     <br>
   <% end %>
