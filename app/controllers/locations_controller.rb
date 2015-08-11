@@ -33,6 +33,12 @@ class LocationsController < ApplicationController
     @comment = Comment.new
   end
 
+  def show_image
+    binding.pry
+    @user = User.find(params[:id])
+    send_data @user.image_binary, :type => 'image/png',:disposition => 'inline'
+  end
+
 
 private
 

@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
+  def show_image
+    @user = User.find(params[:id])
+    send_data @user.image, :type => 'image/png',:disposition => 'inline'
+  end
+
   protected
 
   def configure_permitted_parameters

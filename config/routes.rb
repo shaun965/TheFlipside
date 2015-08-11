@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users
+  devise_for :users 
+  #            :controllers => { :registrations => "users/registrations"}
   resources :locations
   resources :posts
   resources :comments
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
 
   post 'searchLocation' => 'locations#create', as: :processlocation
   get  'locations/:id' => 'locations#show', as: :showLocation
+  get 'locations/show_image' => 'locations#show_image'
+
 
 
 
