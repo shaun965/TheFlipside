@@ -60,10 +60,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <br>
 <div class = "row">
 <div class = "large-6 medium-6 small-6 columns">
-<%= select_year(Date.today, :start_year => Date.today.year, :end_year => 100.years.ago.year) %>
+  <%= select_year(Date.today, :start_year => Date.today.year, :end_year => 100.years.ago.year) %>
 </div>
 <div class = "large-6 medium-6 small-6 columns">
-<%= select_year(Date.today, :start_year => Date.today.year, :end_year => 100.years.ago.year) %>
+  <%= select_year(Date.today, :start_year => Date.today.year, :end_year => 100.years.ago.year) %>
 </div>
 </div>
 
@@ -72,10 +72,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <div class = "large-12 medium-12 small-12 columns">
 <%= form_for(@post) do |a| %>
   <%= a.label :Post %>
-  <%= a.text_area :text, class: 'form-control' %>
+  <%= a.text_area :text, class: 'form-control', placeholder: "About your time here . . ." %>
   <%= a.hidden_field :location_id, :value => @location.id %>
   <%= a.hidden_field :user_id, :value => current_user.id %>
-  <%= a.submit %>
+  <%= a.submit "post" %>
 <% end %>
   </div>
 </div>
@@ -118,7 +118,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
   <% b.comments.each do |d| %>
     <%#= image_tag d.user.avatar.url(:thumb) %>
-    <%= image_tag "data:#{d.user.avatar.content_type};base64,#{d.user.small_image}" %>
+    &nbsp&nbsp&nbsp&nbsp<%= image_tag "data:#{d.user.avatar.content_type};base64,#{d.user.small_image}" %>
     <%= d.user.full_name %>:
     <%= d.text %>
     <br>
