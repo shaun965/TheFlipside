@@ -6,6 +6,18 @@ class CommentsController < ApplicationController
     redirect_to (:back)
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+
+    if @comment.destroy
+      flash[:notice] = "Comment was removed"
+      redirect_to :back
+    else
+      flash[:notice] = "There was an error removing comment"
+      redirect_to :back
+    end
+end 
+
 
 private
 
