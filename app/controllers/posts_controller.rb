@@ -6,6 +6,18 @@ class PostsController < ApplicationController
     redirect_to (:back)
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+
+    if @post.destroy
+      flash[:notice] = "Post was removed"
+      redirect_to :back
+    else
+      flash[:notice] = "There was an error removing the post"
+      redirect_to :back
+    end
+  end 
+
 
 private
 
