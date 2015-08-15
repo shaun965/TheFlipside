@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
       flash[:notice] = "There was an error removing comment"
       redirect_to :back
     end
-end 
+  end 
 
 
 private

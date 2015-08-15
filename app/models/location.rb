@@ -3,12 +3,11 @@ class Location
   include Mongoid::Timestamps
 
   has_many :posts, dependent: :destroy
+  has_many :history, dependent: :destroy
 
   field :lattitude,       type: Float
   field :longitude,       type: Float
   field :dir_longitude,   type: Float
   field :dir_lattitude,   type: Float
-
-
 
 end

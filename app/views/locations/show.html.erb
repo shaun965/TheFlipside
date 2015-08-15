@@ -56,7 +56,23 @@ function initialize() {
         linksControl: false
       });
       myPano.setVisible(true);
-    }
+
+
+    //Google map event listener
+    google.maps.event.addListener(myPano, 'zoom_changed', function() {
+      console.log('zoom_changed');
+      console.log(myPano.getZoom());
+    });
+    google.maps.event.addListener(myPano, 'pano_changed', function() {
+      console.log(myPano.getPano());
+    });
+    google.maps.event.addListener(myPano, 'pov_changed', function() {
+      console.log('heading changed') 
+      console.log(myPano.getPov().heading);
+      console.log('pitch changed')
+      console.log(myPano.getPov().pitch);
+    });
+  }
 
 
 google.maps.event.addDomListener(window, 'load', initialize);

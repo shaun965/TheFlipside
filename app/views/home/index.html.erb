@@ -1,3 +1,4 @@
+<div class = "user_id" style="display: none;"><%= current_user.id %></div>
 <div class = "row">
 <div class = "large-12 medium-12 small-12 columns">
 <h2>The FlipSide</h2>
@@ -9,6 +10,33 @@
 </div>
 </div>
 
+<div class = "row" style="padding-top: 40px;">
+  <div class = "large-6 medium-6 small-6 columns">
+    <button onclick="revealSearch()">Recent searches</button>
+  </div>
+  <div class = "large-6 medium-6 small-6 columns">
+    <button onclick="revealPost()">Recent posts &nbsp&nbsp&nbsp&nbsp</button>
+  </div>
+</div>
+
+<div class = "row searches" style="padding-top: 40px; display: none;">
+  <div class = "large-12 medium-12 small-12 columns">
+    <% for i in (-5..-1).reverse_each %>
+      <%= link_to @historys[i].address, location_path(id: @historys[i].location_id), method: "get" %>
+      <br></br>
+    <% end %>
+  </div>
+</div>
+
+<div class = "row posts" style="padding-top: 40px; display: none;">
+  <div class = "large-12 medium-12 small-12 columns">
+    <% for i in (-5..-1).reverse_each %>
+      <%= link_to @posts[i].text, location_path(id: @posts[i].location_id), method: "get" %>
+      <br></br>
+    <% end %>
+  </div>
+</div>
+
 
 
 
@@ -16,6 +44,16 @@
 <script>
 // This example displays an address form, using the autocomplete feature
 // of the Google Places API to help users fill in the information.
+
+function revealSearch(){
+  $('.searches').css("display","inline");
+  $('.posts').css("display","none");
+}
+
+function revealPost(){
+  $('.searches').css("display","none");
+  $('.posts').css("display","inline");
+}
 
 
 function codeAddress() {
@@ -26,7 +64,7 @@ function codeAddress() {
     var map;
     var dirLongitude;
     var dirLattitude;
-
+    var userId = document.getElementsByClassName("user_id")[0].innerHTML
 
     var address = document.getElementById("autocomplete").value;
 
@@ -58,7 +96,7 @@ function codeAddress() {
           $.ajax({
               type: "post",
               url: "/searchLocation",
-              data: {longitude: results[0].geometry.location.lng(), lattitude: results[0].geometry.location.lat(), dir_longitude: dirLongitude, dir_lattitude: dirLattitude },
+              data: {longitude: results[0].geometry.location.lng(), lattitude: results[0].geometry.location.lat(), dir_longitude: dirLongitude, dir_lattitude: dirLattitude, user_id: userId, address: address },
               success: function(resp){
                 console.log("resp")
                 window.location.href = window.location.href + "locations/" + resp.id
