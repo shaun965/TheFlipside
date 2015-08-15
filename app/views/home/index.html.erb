@@ -22,8 +22,10 @@
 <div class = "row searches" style="padding-top: 40px; display: none;">
   <div class = "large-12 medium-12 small-12 columns">
     <% for i in (-5..-1).reverse_each %>
-      <%= link_to @historys[i].address, location_path(id: @historys[i].location_id), method: "get" %>
-      <br></br>
+      <% if @historys[i] != nil %>
+        <%= link_to @historys[i].address, location_path(id: @historys[i].location_id), method: "get" %>
+        <br></br>
+      <% end %>
     <% end %>
   </div>
 </div>
@@ -31,8 +33,10 @@
 <div class = "row posts" style="padding-top: 40px; display: none;">
   <div class = "large-12 medium-12 small-12 columns">
     <% for i in (-5..-1).reverse_each %>
-      <%= link_to @posts[i].text, location_path(id: @posts[i].location_id), method: "get" %>
-      <br></br>
+      <% if @posts[i] != nil %>
+        <%= link_to @posts[i].text, location_path(id: @posts[i].location_id), method: "get" %>
+        <br></br>
+      <% end %>
     <% end %>
   </div>
 </div>
