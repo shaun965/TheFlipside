@@ -21,7 +21,7 @@
 
 <div class = "row searches" style="padding-top: 40px; display: none;">
   <div class = "large-12 medium-12 small-12 columns">
-    <% for i in (-5..-1).reverse_each %>
+    <% for i in (-20..-1).reverse_each %>
       <% if @historys[i] != nil %>
         <%= link_to @historys[i].address, location_path(id: @historys[i].location_id), method: "get" %>
         <br></br>
@@ -32,7 +32,7 @@
 
 <div class = "row posts" style="padding-top: 40px; display: none;">
   <div class = "large-12 medium-12 small-12 columns">
-    <% for i in (-5..-1).reverse_each %>
+    <% for i in (-20..-1).reverse_each %>
       <% if @posts[i] != nil %>
         <%= link_to @posts[i].text, location_path(id: @posts[i].location_id), method: "get" %>
         <br></br>
@@ -50,13 +50,13 @@
 // of the Google Places API to help users fill in the information.
 
 function revealSearch(){
-  $('.searches').css("display","inline");
+  $('.searches').css("display","block");
   $('.posts').css("display","none");
 }
 
 function revealPost(){
   $('.searches').css("display","none");
-  $('.posts').css("display","inline");
+  $('.posts').css("display","block");
 }
 
 

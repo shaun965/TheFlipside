@@ -32,11 +32,33 @@ class LocationsController < ApplicationController
     @post = Post.new
     @posts = @location.posts
     @comment = Comment.new
+    @history = @location.history.where(user_id: current_user.id).last
   end
 
   def show_image
     @user = User.find(params[:id])
     send_data @user.image_binary, :type => 'image/png',:disposition => 'inline'
+  end
+
+
+  def edit
+    if @location = Location.where(dir_longitude: edit_params[:dir_longitude], lattitude: edit_params[:lattitude]).first
+      render json: { id: @location.id.to_s } , status: 200
+
+      if edit_params[:zoom] != nil
+        @location.zoom = edit_params[:zoom]
+      end
+      if edit_params[:heading] != nil
+        @location.heading = edit_params[:heading]
+      end
+      if edit_params[:pitch] != nil
+        @location.pitch = edit_params[:pitch]
+      end
+      
+      @location.save
+    end
+
+
   end
 
 
@@ -49,5 +71,10 @@ private
   def history_params
     params.permit(:user_id, :address).merge(location_id: @location.id)
   end
+
+  def edit_params
+    params.permit(:zoom, :heading, :pitch, :lattitude, :dir_longitude)
+  end
+
 
 end

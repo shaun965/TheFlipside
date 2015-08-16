@@ -9,5 +9,8 @@ class Location
   field :longitude,       type: Float
   field :dir_longitude,   type: Float
   field :dir_lattitude,   type: Float
+  field :zoom,            type: Float
+  field :pitch,           type: Float
+  field :heading,         type: Float
 
 end

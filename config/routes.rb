@@ -20,8 +20,10 @@ Rails.application.routes.draw do
   root 'home#index'
 
   post 'searchLocation' => 'locations#create', as: :processlocation
+  post 'editLocation' => 'locations#edit', as: :processEditLocation
   get  'locations/:id' => 'locations#show', as: :showLocation
   get 'locations/show_image' => 'locations#show_image'
+
 
 
 

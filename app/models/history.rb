@@ -5,6 +5,7 @@ class History
   belongs_to :location
 
   field :address,     type: String
+  field :year,        type: Integer
 
 
 end
