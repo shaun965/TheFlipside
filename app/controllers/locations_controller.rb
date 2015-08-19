@@ -36,7 +36,6 @@ class LocationsController < ApplicationController
     if !current_user
       redirect_to new_user_session_path
     else
-      binding.pry
       @location = Location.where(id: params[:id]).first
       @post = Post.new
       @posts = @location.posts
@@ -44,7 +43,6 @@ class LocationsController < ApplicationController
       @history = @location.history.where(user_id: current_user.id).last
       @year = @location.view_year.where(user_id: current_user.id).first
       if @location.view_year.where(user_id: current_user.id).first == nil
-        binding.pry
         @year = ViewYear.new(view_year_params.merge(user_id: current_user.id))
         @year.save
       end
