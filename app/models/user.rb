@@ -10,6 +10,7 @@ class User
   has_many :posts
   has_many :comments
   has_many :historys, dependent: :destroy
+  has_many :view_years, dependent: :destroy
   has_mongoid_attached_file :avatar, :styles => { :thumb => "50x50" }, :default_url => ActionController::Base.helpers.image_path("missing.jpg")#{}"/images/:style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 

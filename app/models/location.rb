@@ -4,6 +4,7 @@ class Location
 
   has_many :posts, dependent: :destroy
   has_many :history, dependent: :destroy
+  has_many :view_year, dependent: :destroy
 
   field :lattitude,       type: Float
   field :longitude,       type: Float

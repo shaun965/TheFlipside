@@ -8,6 +8,10 @@ class LocationsController < ApplicationController
       render json: { id: @location.id.to_s } , status: 200
       @history = History.new(history_params)
       @history.save
+      if @location.view_year.where(user_id: current_user.id).first == nil
+        @year = ViewYear.new(view_year_params)
+        @year.save
+      end
     else
       @location = Location.new(location_params)
       if @location.save
@@ -17,7 +21,11 @@ class LocationsController < ApplicationController
       end
       @history = History.new(history_params)
       @history.save
+      @year = ViewYear.new(view_year_params)
+      @year.save
     end
+
+
 
     #redirect_to :action => "show", :id => @location.id
 
@@ -27,12 +35,20 @@ class LocationsController < ApplicationController
   def show
     if !current_user
       redirect_to new_user_session_path
+    else
+      binding.pry
+      @location = Location.where(id: params[:id]).first
+      @post = Post.new
+      @posts = @location.posts
+      @comment = Comment.new
+      @history = @location.history.where(user_id: current_user.id).last
+      @year = @location.view_year.where(user_id: current_user.id).first
+      if @location.view_year.where(user_id: current_user.id).first == nil
+        binding.pry
+        @year = ViewYear.new(view_year_params.merge(user_id: current_user.id))
+        @year.save
+      end
     end
-    @location = Location.where(id: params[:id]).first
-    @post = Post.new
-    @posts = @location.posts
-    @comment = Comment.new
-    @history = @location.history.where(user_id: current_user.id).last
   end
 
   def show_image
@@ -75,6 +91,11 @@ private
   def edit_params
     params.permit(:zoom, :heading, :pitch, :lattitude, :dir_longitude)
   end
+
+  def view_year_params
+    params.permit(:user_id).merge(location_id: @location.id)
+  end
+
 
 
 end

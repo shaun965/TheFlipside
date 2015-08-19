@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :posts
   resources :comments
   resources :historys
+  resources :view_years
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
 
   post 'searchLocation' => 'locations#create', as: :processlocation
   post 'editLocation' => 'locations#edit', as: :processEditLocation
+  post 'editYear' => 'view_years#edit', as: :processEditYear
   get  'locations/:id' => 'locations#show', as: :showLocation
   get 'locations/show_image' => 'locations#show_image'
 

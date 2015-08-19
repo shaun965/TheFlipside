@@ -5,6 +5,9 @@
 <div class = "zoom" style="display: none;"><%= @location.zoom %></div>
 <div class = "pitch" style="display: none;"><%= @location.pitch %></div>
 <div class = "heading" style="display: none;"><%= @location.heading %></div>
+<div class = "locationId" style="display: none;"><%= @location.id %></div>
+<% binding.pry %>
+
 <div></div>
 <style>
       #map-canvas {
@@ -113,17 +116,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div id = "map-canvas"></div>
 <br>
 <div class = "row">
-<div class = "large-6 medium-6 small-6 columns startYear">
-  <%= form_for(@history) do |f| %>
+<div class = "large-6 medium-6 small-6 columns">
     <%#= f.select(:year, 2013.downto(1923)) %>
-    <%= select_year(Date.today, {:start_year => Date.today.year, :end_year => 100.years.ago.year}, {:class => "span1"}) %>
-  <% end %>
+        <%= select_year(@year.start_year.to_f, {:start_year => Date.today.year, :end_year => 100.years.ago.year}, {:id => "startYear", :class => "span1", :onchange =>'rememberTimeFrame();'}) %>
 </div>
-<div class = "large-6 medium-6 small-6 columns endYear">
-  <%= form_for(@history) do |f| %>
+<div class = "large-6 medium-6 small-6 columns">
     <%#= f.select(:year, 2013.downto(1923)) %>
-    <%= select_year(Date.today, {:start_year => Date.today.year, :end_year => 100.years.ago.year}, {:class => "span1"}) %>
-  <% end %>
+    <%= select_year(@year.end_year.to_f, {:start_year => Date.today.year, :end_year => 100.years.ago.year}, {:id=> "endYear", :class => "span1", :onchange =>'rememberTimeFrame();'}) %>
 </div>
 </div>
 
@@ -200,6 +199,20 @@ google.maps.event.addDomListener(window, 'load', initialize);
   </div>
 </div>
 
+<script>
+  function rememberTimeFrame(){
+    var startYear = Number(document.getElementById("startYear").options[document.getElementById("startYear").selectedIndex].text);
+    var endYear = Number(document.getElementById("endYear").options[document.getElementById("endYear").selectedIndex].text);
+    var locationId = document.getElementsByClassName("locationId")[0].innerHTML
+    debugger
+    $.ajax({
+      type: "post",
+      url: "/editYear",
+      data: { start_year: startYear, end_year: endYear, location_id: locationId },
+      success: function(resp){}
+    });
+  }
+</script>
 
 
 
