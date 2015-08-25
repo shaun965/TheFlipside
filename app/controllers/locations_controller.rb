@@ -38,7 +38,7 @@ class LocationsController < ApplicationController
     else
       @location = Location.where(id: params[:id]).first
       @post = Post.new
-      @posts = @location.posts
+      @posts = @location.posts.sort_by(&:created_at)
       @comment = Comment.new
       @history = @location.history.where(user_id: current_user.id).last
       @year = @location.view_year.where(user_id: current_user.id).first
